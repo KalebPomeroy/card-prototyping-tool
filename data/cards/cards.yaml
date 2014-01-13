@@ -1,0 +1,43 @@
+-
+    card_type: minion
+    id: dragon_1
+    name: Ice Dragon
+    faction: Arcane
+    type: Dragon Mage
+    strength: 7
+    health: 3
+    cost: 4
+    text: "Relentless\nWhen this minion attacks target character cannot block this turn"
+    flavor_text: "It's hard to fight when your limbs are frozen solid."
+
+-
+    card_type: minion
+    id: orc_minion_2
+    name: Orcish Smith
+    faction: Tribal
+    type: Orc Rouge
+    strength: 6
+    health: 1
+    cost: 2
+    text: "Preparation: Pay 1 threat to destroy a weapon and attach it to this character, ignoring faction restrictions"
+    flavor_text: "The best orc smiths are the best orc theives."
+
+-
+    card_type: item
+    id: orc_armor_1
+    name: Scavenged Armor
+    faction: Tribal
+    type: Item Armor
+    cost: 1
+    health: "+1"
+    text: "Response: If bearer is about to be wounded, discard this item to prevent that wound "
+    flavor_text: "It doesn't always fit, but sometimes it deflects an arrow."
+
+-
+    card_type: action
+    id: orc_ambush
+    name: Orc Ambush
+    faction: Tribal
+    cost: 0
+    text: "Preparation: Each Orc gains 'Pay {2}: Gain support'"
+    flavor_text: "Orcish ambushes are easy to spot. They are just about impossible to avoid"

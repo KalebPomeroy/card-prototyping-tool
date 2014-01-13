@@ -1,0 +1,55 @@
+card: &horizontal_card
+    cost: &cost
+        x: 30
+        y: 52
+        font_size: 35
+        color: green
+    type:
+        container_width: 360
+        container_height: 20
+        y: 290
+        font_size: 16
+        gravity: centered
+    text:
+        x: 90
+        y: 340
+        wordwrap: 35
+    flavor_text:
+        font: italics
+        container_width: 360
+        container_height: 20
+        x: 20
+        y: 430
+        wordwrap: 40
+        gravity: centered
+    strength:
+        x: 35
+        y: 255
+        offset_per_char:
+            y: 0
+            x: -5
+        font_size: 30
+        color: blue
+    health:
+        x: 35
+        y: 333
+        offset_per_char:
+            y: 0
+            x: -5
+        font_size: 30
+        color: red
+
+    name:
+        x: 70
+        y: 40
+        font_size: 20
+        wordwrap: 35
+    subtitle:
+        x: 90
+        y: 57
+        font_size: 16
+        wordwrap: 35
+
+minion: *horizontal_card
+item: *horizontal_card
+action: *horizontal_card
