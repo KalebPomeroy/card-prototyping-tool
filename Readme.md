@@ -54,4 +54,11 @@ used this, no promises):
     * container_width: The width of a container to put content in
     * container_height: The height of a container to put content in
     * gravity: How content should be aligned in the container
-
+    
+# TODO: 
+* Source height 
+* Source width
+* Depends on conditions
+* repeat X times (similar to conditions)
+* Flesh out font choices
+* deck to html generator
