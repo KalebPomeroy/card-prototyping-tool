@@ -4,7 +4,8 @@ class Attribute
 
     attr_accessor :type
 
-    attr_accessor :source_image
+    attr_accessor :source_image, :source_height, :source_width
+
     attr_accessor :blending_method
 
     attr_accessor :text
@@ -13,6 +14,7 @@ class Attribute
 
     attr_accessor :x, :y
     attr_accessor :rotation
+
 
     attr_accessor :container_height, :container_width
     attr_accessor :gravity
@@ -28,7 +30,7 @@ class Attribute
         @container_width = 0
         @container_height = 0
         @font_size = 14
-        @_font = "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman.ttf"
+        @_font = "lib/fonts/Times_New_Roman.ttf"
         options.each_pair { | k, v | self.send("#{k}=",v) }
     end
 
@@ -71,7 +73,7 @@ class Attribute
     def font=(font)
         case font
         when "italics", :italics
-            @_font = "/usr/share/fonts/truetype/msttcorefonts/Times_New_Roman_Italic.ttf"
+            @_font = "lib/fonts/Times_New_Roman_Italic.ttf"
         end
     end
 
@@ -91,7 +93,7 @@ end
 
 class Image
 
-    attr_accessor :background, :format, :height, :width, :image_path
+    attr_accessor :background, :format, :height, :width, :image_path, :source_height, :source_width
 
     def initialize(image_name)
         @image_name = image_name
@@ -122,6 +124,7 @@ class Image
                 # TODO: Read source image in a way smarter than from the filesystem
                 # so that users can have separate, managable files
                 img = Magick::Image.read(a.source_image).first
+                img.resize!(a.source_width, a.source_height) if a.source_width && a.source_height
                 @_image.composite!(img, a.x, a.y, a.blending_method)
             elsif(a.type == "text")
                 text = Magick::Draw.new

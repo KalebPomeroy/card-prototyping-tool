@@ -1,8 +1,8 @@
 require './lib/image'
 
 # Add newlines every 35 characters, without breaking words
-def wordwrap(txt, col=35)
-    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3\n") if txt
+def wordwrap(txt, col=35, wrap_char="\n")
+    txt.gsub(/(.{1,#{col}})( +|$\n?)|(.{1,#{col}})/, "\\1\\3#{wrap_char}") if txt
 end
 
 # Given string including {{var}}, replace with hash["var"]
@@ -37,7 +37,13 @@ class CardGenerator
 
         # Handle Wordwrapping
         if attr_def.has_key? :wordwrap
-            opts[:text] = wordwrap(opts[:text], attr_def[:wordwrap])
+            if attr_def[:wordwrap].is_a? Numeric
+                opts[:text] = wordwrap(opts[:text], attr_def[:wordwrap])
+            else
+                opts[:text] = wordwrap(opts[:text], attr_def[:wordwrap][:limit],
+                    attr_def[:wordwrap][:char])
+            end
+
             attr_def.delete(:wordwrap)
         end
 
@@ -58,8 +64,10 @@ class CardGenerator
         end
 
         # Handle variables in the artwork
-        if(attribute == "artwork")
-            opts[:source_image] = render(attr_def[:source_image], card)
+        if attr_def.has_key? :render_with_variables
+            r = attr_def[:render_with_variables]
+            opts[r] = render(attr_def[r], card)
+            attr_def.delete(:render_with_variables)
         end
 
         Attribute.new(attr_def.merge(opts))
@@ -82,6 +90,8 @@ class CardGenerator
         @_card = Image.new(card['id'])
 
         layout = self.get_layout_for_type(card[:card_type])
+
+        raise "Could not find layout for #{card[:card_type]}" unless layout
 
         # Do the Background specially
         @_card.background = render(layout[:background], card)
